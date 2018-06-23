@@ -1,0 +1,51 @@
+.lead-h1 {
+    color: rgb(1, 114, 189);
+    font-weight: bold;
+    text-shadow: 0 2px 0px rgb(1, 56, 92);
+}
+.m-t {
+    margin-top: 10%;
+}
+.m-l {
+    margin-left: 3%;
+}
+#lead-form input {
+    padding: 1% 3%;
+    background: rgb(241, 251, 255);
+}
+.btn-custom {
+    margin-top: 3%;
+    box-sizing:border-box;
+    padding: 1% 5%;
+    background: rgb(1, 114, 189);
+    color: white;
+    border: 3px solid rgb(1, 114, 189);
+    border-radius: 40px;
+}
+.btn-custom:hover {
+    color: rgb(1, 114, 189);
+    background: white;
+    border: 3px solid rgb(1, 114, 189);
+}
+body {
+    background: url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-173675.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    padding-bottom: 10%;
+}
+.col-sm-8, #output {
+    padding: 3% 3%;
+    background: rgba(244, 253, 255, 0.801);
+    box-shadow: 15px 15px 0 rgb(1, 61, 95);
+}
+#header, #profile, #footer, .fullname{
+    display: none;
+}
+#followxs h1 {
+    margin: 3% auto;
+}
+.followx {
+    width: 30%;
+    display: inline-block;
+    margin-right: 2%;
+}
