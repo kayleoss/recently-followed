@@ -97,6 +97,8 @@ $(document).ready(() => {
                         } else {
                           $('#output').append("<p>" + res + "</p>");
                         }
+                          
+                        $('#ouput').append("<a href='' class='btn btn-custom m-t'>Back</a>");
 
                       };
 
