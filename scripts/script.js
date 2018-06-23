@@ -51,9 +51,8 @@ $(document).ready(() => {
 
                     newResult = $.parseHTML(newResult);
 
-                    $('#output').append(newResult);
-
                     $('#output').append("<button class='btn btn-custom' id='saveToDatabase'>Enter Into Database</button><button id='compare' class='btn btn-custom m-l' >Compare</button><a href='' class='btn btn-custom m-l'>Back</a>");
+                    $('#output').append(newResult);
 
                     var fArray = [];
                     for ( i=0; i < $(".followx").length; i++ ) {
@@ -67,7 +66,7 @@ $(document).ready(() => {
                       var data = JSON.stringify({user: $('#username').val(), following: fArray});
 
                       $.ajax({
-                        url: "http://localhost:5000/save",
+                        url: "https://recently-followed.herokuapp.com/save",
                         method: "POST",
                         data: {user: $('#username').val(), following: fArray}
                       }).then(res => {
@@ -79,18 +78,28 @@ $(document).ready(() => {
 
                     $('#compare').on('click', function() {
 
-                      var data = JSON.stringify({user: $('#username').val(), following: fArray});
-
                       function compareEm (){
                         $.ajax({
-                          url: "http://localhost:5000/compare",
+                          url: "https://recently-followed.herokuapp.com/compare",
                           method: "POST",
                           data: {user: $('#username').val(), following: fArray},
                           success: handleResponse
                         })
                       }
+
                       function handleResponse(res) {
-                        $('#output').html("<h1 class='lead-h1'>Who They Recently Followed:<h1><br>" + res); 
+                        $('#output').html("<h1 class='lead-h1'>Who They Recently Followed:<h1><br>");
+
+                        res = JSON.parse(res);
+
+                        if (!res.includes("has not followed anyone new yet!")) {
+                          res.map(user => {
+                            $("#output").append("<p>" + res + "</p><br>");
+                          })
+                        } else {
+                          $('#output').append("<p>" + res + "</p>");
+                        }
+
                       };
 
                       compareEm();
