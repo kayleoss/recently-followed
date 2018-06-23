@@ -32,9 +32,7 @@ $(document).ready(() => {
 
                 e.preventDefault();
 
-                for (i = 0; i < $('.col-sm-8').length; i++) {
-                    $('.col-sm-8')[i].style.display = 'none';
-                }
+                $('.col-sm-8').hide();
 
                 doCORSRequest({
                     method: 'GET',
