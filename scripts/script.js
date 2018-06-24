@@ -23,6 +23,8 @@ $(document).ready(() => {
     // Bind event
     (function () {
 
+        let newResult;
+
         var outputField = document.getElementById('output');
 
 
@@ -33,19 +35,21 @@ $(document).ready(() => {
                 e.preventDefault();
 
                 $('.col-sm-8').hide();
+                $('#output').show();
+
+                $('#loading').show();
 
                 doCORSRequest({
                     method: 'GET',
                     url: url
                 }, function printResult(result) {
 
-                    var newResult = result.split("<");
+                    $('#loading').hide();
+
+                    newResult = result.split("<");
                     newResult.splice(0, 28);
                     newResult.unshift(" ");
                     newResult = newResult.join("<");
-
-
-                    $('#output').show();
 
                     newResult = $.parseHTML(newResult);
 
@@ -63,20 +67,25 @@ $(document).ready(() => {
 
                       var data = JSON.stringify({user: $('#username').val(), following: fArray});
 
-                      $.ajax({
+                      function save() {
+                        $('#loading').show();
+                        $.ajax({
                         url: "https://recently-followed.herokuapp.com/save",
                         method: "POST",
                         data: {user: $('#username').val(), following: fArray}
-                      }).then(res => {
-                        alert(res);
-                      })
-
+                        }).then(res => {
+                          $('#loading').hide();
+                          alert(res);
+                        })
+                      }
+                      save();
                     });
 
 
                     $('#compare').on('click', function() {
 
                       function compareEm (){
+                        $('#loading').show();
                         $.ajax({
                           url: "https://recently-followed.herokuapp.com/compare",
                           method: "POST",
@@ -86,19 +95,18 @@ $(document).ready(() => {
                       }
 
                       function handleResponse(res) {
+                        $('#loading').hide();
                         $('#output').html("<h1 class='lead-h1'>Who They Recently Followed:<h1><br>");
 
                         res = JSON.parse(res);
 
                         if (!res.includes("has not followed anyone new yet!")) {
                           res.map(user => {
-                            $("#output").append("<p>" + res + "</p><br>");
+                            $("#output").append("<p>" + res + "</p><br><a href='' class='btn btn-custom m-t'>Back</a>");
                           })
                         } else {
-                          $('#output').append("<p>" + res + "</p>");
+                          $('#output').append("<p>" + res + "</p><br><a href='' class='btn btn-custom m-t'>Back</a>");
                         }
-                          
-                        $('#ouput').append("<a href='' class='btn btn-custom m-t'>Back</a>");
 
                       };
 
