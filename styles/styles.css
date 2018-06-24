@@ -1,3 +1,14 @@
+@keyframes colorChange {
+  from {color: grey;}
+  to {color: blue;}
+}
+#loading p{
+  font-weight: bold;
+  animation-name: colorChange;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
 .lead-h1 {
     color: rgb(1, 114, 189);
     font-weight: bold;
