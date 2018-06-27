@@ -44,29 +44,30 @@ $(document).ready(() => {
                     url: url
                 }, function printResult(result) {
 
-                    $('#loading').hide();
+                  var fArray = [];
+                  newResult = result.split("<");
+                  newResult.splice(0, 28);
+                  newResult.unshift(" ");
+                  newResult = newResult.join("<");
 
-                    newResult = result.split("<");
-                    newResult.splice(0, 28);
-                    newResult.unshift(" ");
-                    newResult = newResult.join("<");
-
+                  if (newResult.toString().includes("Fatal error")) {
+                    fArray = null;
+                    return $("#output").html("<p>This User Has Made Their Profile Private.</p><br><a href='' class='btn btn-custom m-l'>Back</a>");
+                  } else {
                     newResult = $.parseHTML(newResult);
-
+                    $('#loading').hide();
                     $('#output').append("<button class='btn btn-custom' id='saveToDatabase'>Enter Into Database</button><button id='compare' class='btn btn-custom m-l' >Compare</button><a href='' class='btn btn-custom m-l'>Back</a>");
                     $('#output').append(newResult);
 
-                    var fArray = [];
                     for ( i=0; i < $(".followx").length; i++ ) {
                       var item = $('.followx').children("a:nth-child(2)")[i].innerHTML;
                       fArray.push(item.toString());
                     }
+                  }
 
 
                     $('#saveToDatabase').on('click', function() {
-
-                      var data = JSON.stringify({user: $('#username').val(), following: fArray});
-
+                      
                       function save() {
                         $('#loading').show();
                         $.ajax({
