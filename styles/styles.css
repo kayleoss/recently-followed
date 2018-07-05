@@ -39,7 +39,7 @@
     border: 3px solid rgb(1, 114, 189);
 }
 body {
-    background: url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-173675.jpg');
+    background: -webkit-linear-gradient(left top, lightblue, blue);
     background-size: cover;
     background-attachment: fixed;
     padding-bottom: 10%;
@@ -59,4 +59,8 @@ body {
     width: 30%;
     display: inline-block;
     margin-right: 2%;
+}
+.result-a {
+    font-size: 1.3em;
+    display: block;
 }

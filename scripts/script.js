@@ -103,8 +103,12 @@ $(document).ready(() => {
 
                         if (!res.includes("has not followed anyone new yet!")) {
                           res.map(user => {
-                            $("#output").append("<p>" + res + "</p><br><a href='' class='btn btn-custom m-t'>Back</a>");
-                          })
+                            var userArray = user.split("");
+                            userArray.shift();
+                            userArray = userArray.join("");
+                            $("#output").append("<a target='_blank' class='result-a' href='https://instagram.com/" + userArray +  "' >" + user + "</a>");
+                          });
+                          $('#output').append("<br><a href='' class='btn btn-custom m-t'>Back</a>");
                         } else {
                           $('#output').append("<p>" + res + "</p><br><a href='' class='btn btn-custom m-t'>Back</a>");
                         }
@@ -114,9 +118,6 @@ $(document).ready(() => {
                       compareEm();
 
                     });
-
-
-
                 });
             };
     })();
